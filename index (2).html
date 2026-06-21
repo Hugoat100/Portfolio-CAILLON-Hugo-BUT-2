@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hugo Caillon — Portfolio · Sciences des Données</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Palette — atelier data sur fond papier chaud */
+  --bg:        #f7f6f2;
+  --paper:     #ffffff;
+  --ink:       #15191f;
+  --muted:     #5d6470;
+  --faint:     #8a909b;
+  --line:      #e4e2da;
+  --grid:      #ececdf;
+
+  /* Code couleur officiel des 4 compétences BUT SD */
+  --c1: #c8502a;   /* Traiter   */
+  --c2: #2563eb;   /* Analyser  */
+  --c3: #138a4e;   /* Valoriser */
+  --c4: #7c46d6;   /* Modéliser */
+
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --sans:'Space Grotesk', system-ui, sans-serif;
+
+  --maxw: 1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  line-height:1.6;
+  background-color:var(--bg);
+  /* SIGNATURE : plan cartésien / papier millimétré subtil */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:46px 46px;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none;transition:color .2s}
+ul{list-style:none}
+img{display:block;max-width:100%}
+
+:focus-visible{outline:2px solid var(--c2);outline-offset:3px;border-radius:3px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.2rem,5vw,3rem)}
+
+/* ============ HEADER ============ */
+header{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.bar{
+  display:flex;align-items:center;justify-content:space-between;
+  height:68px;
+}
+.logo{
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -.4px;
+  color: var(--ink);
+}
+.nav{display:flex;gap:2rem;align-items:center}
+.nav a{font-size:.92rem;font-weight:500;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.nav .cta{
+  font-family:var(--mono);font-size:.82rem;
+  border:1px solid var(--ink);color:var(--ink);
+  padding:.45rem .9rem;border-radius:999px;
+}
+.nav .cta:hover{background:var(--ink);color:var(--bg)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:32px;height:32px}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto;transition:.25s}
+
+/* ============ HERO ============ */
+.hero{padding:clamp(3rem,8vw,6rem) 0 clamp(3rem,7vw,5rem)}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(2rem,5vw,4rem);align-items:center;
+}
+.eyebrow{
+  font-family:var(--mono);font-size:.78rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.6rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--muted)}
+.hero h1{
+  font-size:clamp(2.8rem,7vw,5rem);line-height:.98;font-weight:700;
+  letter-spacing:-2px;margin-bottom:1.4rem;
+}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln i{display:block;font-style:normal;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 .ln:nth-child(2) i{animation-delay:.08s}
+.hero h1 em{
+  font-style:normal;position:relative;white-space:nowrap;
+}
+.hero h1 em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.08em;height:.16em;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4));
+  border-radius:2px;opacity:.9;
+}
+.hero .lead{font-size:1.12rem;color:var(--muted);max-width:30rem;}
+.hero .lead b{color:var(--ink);font-weight:600}
+
+/* Photo */
+.portrait{position:relative;justify-self:center;width:100%;max-width:360px}
+.portrait .frame{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);background:var(--paper);
+  box-shadow:0 24px 60px -24px rgba(21,25,31,.35);
+  aspect-ratio:1/1;
+  animation:rise 1s cubic-bezier(.2,.7,.2,1) .15s both;
+}
+.portrait .frame img{width:100%;height:100%;object-fit:cover}
+
+/* ============ SECTIONS ============ */
+section{position:relative}
+.block{padding:clamp(3.5rem,7vw,6rem) 0;border-top:1px solid var(--line)}
+.sec-head{margin-bottom:3rem;max-width:46rem}
+.sec-num{font-family:var(--mono);font-size:.8rem;color:var(--faint);letter-spacing:1px;margin-bottom:.8rem}
+.sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-1px;line-height:1.05;margin-bottom:.7rem}
+.sec-head p{color:var(--muted)}
+
+/* reveal au scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ COMPÉTENCES ============ */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:1.1rem}
+.comp-card{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:16px;padding:1.7rem;cursor:pointer;position:relative;
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.comp-card::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:4px;
+  background:var(--cc);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;
+}
+.comp-card:hover,.comp-card.active{transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(21,25,31,.4);border-color:color-mix(in srgb,var(--cc) 45%,var(--line))}
+.comp-card:hover::before,.comp-card.active::before{transform:scaleY(1)}
+.comp-card[data-comp="1"]{--cc:var(--c1)}
+.comp-card[data-comp="2"]{--cc:var(--c2)}
+.comp-card[data-comp="3"]{--cc:var(--c3)}
+.comp-card[data-comp="4"]{--cc:var(--c4)}
+.comp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.6rem}
+.comp-tag{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.5px;color:var(--cc);background:color-mix(in srgb,var(--cc) 12%,transparent);padding:.25rem .55rem;border-radius:6px}
+.comp-glyph{width:34px;height:34px;color:var(--cc)}
+.comp-card h3{font-size:1.45rem;font-weight:600;margin-bottom:.5rem;letter-spacing:-.4px}
+.comp-card .desc{color:var(--muted);font-size:.92rem;min-height:2.4em}
+.comp-link{margin-top:auto;padding-top:1.5rem;font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--cc);display:flex;align-items:center;gap:.45rem;transition:gap .2s}
+.comp-card:hover .comp-link{gap:.8rem}
+
+/* ============ PANNEAUX SAÉ ============ */
+.sae-panel{display:none;margin-top:2rem}
+.sae-panel.open{display:block;animation:rise .5s ease both}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding-bottom:1rem;margin-bottom:1.8rem;border-bottom:2px solid color-mix(in srgb,var(--cc) 30%,transparent)}
+.panel-head h3{font-size:1.4rem;font-weight:700;color:var(--cc);letter-spacing:-.5px}
+.panel-desc{color:var(--muted);font-size:.96rem;line-height:1.6;max-width:54rem;margin-bottom:1.8rem}
+.sae-badge{font-family:var(--mono);font-size:.76rem;font-weight:600;color:var(--cc);background:var(--paper);border:1px solid color-mix(in srgb,var(--cc) 35%,var(--line));padding:.3rem .65rem;border-radius:999px}
+
+/* Sous-compétences (composantes essentielles) */
+.ce-box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--cc);border-radius:12px;padding:1.3rem 1.5rem;margin-bottom:1.8rem}
+.ce-box-head{display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:1rem}
+.ce-box-head h5{font-family:var(--mono);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--cc)}
+.ce-box-head .ce-toggle{font-size:.8rem;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.ce-box.open .ce-toggle{transform:rotate(180deg)}
+.ce-list{list-style:none;margin-top:0;max-height:0;overflow:hidden;transition:max-height .4s ease, margin-top .3s ease}
+.ce-box.open .ce-list{max-height:1600px;margin-top:1rem}
+.ce-list li{font-size:.88rem;color:var(--muted);padding:.55rem 0;border-top:1px solid var(--line);display:flex;gap:.7rem}
+.ce-list li:first-child{border-top:none}
+.ce-list b{font-family:var(--mono);font-size:.76rem;color:var(--cc);flex-shrink:0;min-width:5rem}
+.ce-list .ac-txt{display:block}
+.ce-saes{display:inline-flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem}
+.ce-sae{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.3px;color:var(--cc);background:color-mix(in srgb,var(--cc) 12%,transparent);border:1px solid color-mix(in srgb,var(--cc) 38%,transparent);padding:.12rem .45rem;border-radius:5px;white-space:nowrap}
+
+/* Onglets de vue (Compétences / SAÉ) */
+.view-tabs{display:inline-flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;margin-bottom:2rem}
+.view-tab{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--muted);background:transparent;border:none;padding:.55rem 1.3rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.view-tab.active{background:var(--ink);color:var(--bg)}
+.view{display:none}
+.view.active{display:block}
+
+/* Vue par SAÉ */
+.proj-list{display:grid;gap:1.2rem}
+.proj-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.proj-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.4rem 1.7rem;cursor:pointer;flex-wrap:wrap}
+.proj-head-l{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.proj-head h4{font-size:1.1rem;font-weight:700;letter-spacing:-.3px}
+.proj-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.proj-tag{font-family:var(--mono);font-size:.72rem;font-weight:700;padding:.22rem .55rem;border-radius:6px;color:#fff}
+.proj-toggle{font-size:.85rem;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.proj-card.open .proj-toggle{transform:rotate(180deg)}
+.proj-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.proj-card.open .proj-body{max-height:6000px}
+.proj-body-in{padding:0 1.7rem 1.7rem;display:grid;gap:1.5rem}
+
+.sae-grid{display:grid;gap:1.5rem}
+.sae-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+.sae-card h4{font-size:1.12rem;font-weight:600;margin-bottom:1.3rem;letter-spacing:-.3px}
+.info-block{margin-bottom:1.1rem}
+.info-block span{display:block;font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--faint);margin-bottom:.25rem}
+.info-block p{font-size:.94rem;color:var(--ink)}
+.tools{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.45rem}
+.tool{font-family:var(--mono);font-size:.76rem;background:var(--bg);border:1px solid var(--line);padding:.22rem .55rem;border-radius:6px;color:var(--muted)}
+
+/* galerie / placeholder visuel */
+.gallery{display:flex;flex-direction:column;gap:.7rem;justify-content:center}
+.shot{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--bg);position:relative;display:flex;align-items:center;justify-content:center}
+.shot img{width:100%;height:auto;object-fit:contain;display:block}
+.shot-cap{font-size:.78rem;color:var(--muted);font-style:italic;text-align:center}
+
+/* ============ ALTERNANCE ============ */
+.alt{display:grid;gap:1.5rem}
+.alt-head{
+  background:var(--ink);color:var(--bg);border-radius:18px;padding:2.2rem;position:relative;overflow:hidden;
+}
+.alt-head::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.alt-head .role{font-family:var(--mono);font-size:.82rem;color:#9fb4ff;margin-bottom:1rem;letter-spacing:.5px}
+.alt-head h3{font-size:1.5rem;font-weight:700;margin-bottom:.9rem;letter-spacing:-.5px}
+.alt-head p{color:#c9ccd3;max-width:46rem;font-size:.96rem}
+.pn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.1rem;align-items:start}
+.pn-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.5rem;border-top:4px solid var(--cc)}
+.pn-card .pn-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.7rem}
+.pn-card .pn-tag{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.5px;padding:.2rem .5rem;border-radius:6px;color:#fff}
+.pn-card h4{font-size:1.05rem;font-weight:600;margin-bottom:.55rem}
+.pn-card p{font-size:.9rem;color:var(--muted)}
+.pn-shot{margin-top:1.2rem;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.pn-shot+.pn-shot{margin-top:.8rem}
+.pn-shot img{width:100%;height:auto;display:block}
+.pn-cap{font-size:.76rem;color:var(--faint);font-style:italic;margin-top:.45rem;line-height:1.4}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line);padding:3rem 0 4rem}
+.foot{display:flex;justify-content:flex-end;align-items:flex-end;gap:1.5rem;flex-wrap:wrap}
+.foot .big{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.1}
+.foot .big a{border-bottom:2px solid var(--c2)}
+.foot .big a:hover{color:var(--c2)}
+.foot .meta{font-family:var(--mono);font-size:.78rem;color:var(--faint);text-align:right;line-height:1.8}
+
+/* ============ ANIMATIONS ============ */
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;text-align:left}
+  .portrait{order:-1;max-width:280px;justify-self:start}
+  .sae-card{grid-template-columns:1fr}
+  .nav{position:fixed;inset:68px 0 auto 0;flex-direction:column;gap:0;background:var(--bg);
+    border-bottom:1px solid var(--line);padding:0;max-height:0;overflow:hidden;transition:max-height .3s}
+  .nav.open{max-height:340px}
+  .nav a{width:100%;padding:1rem clamp(1.2rem,5vw,3rem);border-top:1px solid var(--line)}
+  .nav .cta{margin:1rem clamp(1.2rem,5vw,3rem);width:auto;text-align:center}
+  .burger{display:block}
+  .foot{flex-direction:column;align-items:flex-start}
+  .foot .meta{text-align:left}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="#accueil" class="logo">Hugo Caillon</a>
+    <nav class="nav" id="nav">
+      <a href="#accueil">Accueil</a>
+      <a href="#competences">Compétences</a>
+      <a href="#alternance">Alternance</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ ACCUEIL ============ -->
+<section id="accueil" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">BUT Sciences des Données · 2ᵉ année</span>
+      <h1>
+        <span class="ln"><i>Hugo</i></span>
+        <span class="ln"><i>Caillon</i></span>
+      </h1>
+      <p class="lead">Le portfolio propose d'étudier mes différents projets réalisés à l'IUT ainsi que mon travail effectué en alternance à LA LONGUE VUE.</p>
+    </div>
+    <div class="portrait">
+      <div class="frame">
+        <img src="portrait.png" alt="Portrait d'Hugo Caillon">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPÉTENCES ============ -->
+<section id="competences" class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 01 — Référentiel BUT SD</div>
+      <h2>Les compétences du BUT SD</h2>
+      <p>Le programme national du BUT Sciences des Données s'articule autour de quatre compétences. Choisissez votre angle d'exploration : par compétence du référentiel, ou par projet réalisé.</p>
+    </div>
+
+    <div class="view-tabs reveal">
+      <button class="view-tab active" id="tab-comp" onclick="switchView('comp')">Par compétence</button>
+      <button class="view-tab" id="tab-proj" onclick="switchView('proj')">Par SAÉ</button>
+    </div>
+
+    <div class="view active" id="view-comp">
+    <div class="comp-grid reveal">
+      <div class="comp-card" data-comp="1" role="button" tabindex="0" onclick="togglePanel(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePanel(1)}">
+        <div class="comp-top">
+          <span class="comp-tag">C1</span>
+          <svg class="comp-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>
+        </div>
+        <h3>Traiter</h3>
+        <p class="desc">Automatiser le traitement de données multidimensionnelles.</p>
+        <div class="comp-link">Voir les SAÉ <span>→</span></div>
+      </div>
+
+      <div class="comp-card" data-comp="2" role="button" tabindex="0" onclick="togglePanel(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePanel(2)}">
+        <div class="comp-top">
+          <span class="comp-tag">C2</span>
+          <svg class="comp-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V4M4 20h16"/><path d="M7 16l3-5 3 3 5-7"/></svg>
+        </div>
+        <h3>Analyser</h3>
+        <p class="desc">Mettre en œuvre une analyse exploratoire des données.</p>
+        <div class="comp-link">Voir les SAÉ <span>→</span></div>
+      </div>
+
+      <div class="comp-card" data-comp="3" role="button" tabindex="0" onclick="togglePanel(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePanel(3)}">
+        <div class="comp-top">
+          <span class="comp-tag">C3</span>
+          <svg class="comp-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V4M4 20h16"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="0.5" height="4"/></svg>
+        </div>
+        <h3>Valoriser</h3>
+        <p class="desc">Restituer et argumenter ses résultats avec impact.</p>
+        <div class="comp-link">Voir les SAÉ <span>→</span></div>
+      </div>
+
+      <div class="comp-card" data-comp="4" role="button" tabindex="0" onclick="togglePanel(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePanel(4)}">
+        <div class="comp-top">
+          <span class="comp-tag">C4</span>
+          <svg class="comp-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="6" cy="8" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><path d="M7.7 9.2l3 6.2M16.6 8.6l-3.4 7M8 8h8"/></svg>
+        </div>
+        <h3>Modéliser</h3>
+        <p class="desc">Mettre en œuvre un modèle statistique ou prédictif.</p>
+        <div class="comp-link">Voir les SAÉ <span>→</span></div>
+      </div>
+    </div>
+
+    <!-- PANNEAU C1 -->
+    <div id="panel-1" class="sae-panel" style="--cc:var(--c1)">
+      <div class="panel-head"><h3>Traitement de données</h3><span class="sae-badge">Compétence 1 · Traiter</span></div>
+      <p class="panel-desc">Cette aptitude réside dans le fait d'agir sur l'ensemble des phases du cycle de vie des informations (intégration, mise à jour, récupération, effacement), en se basant sur l'architecture de données conforme aux exigences et en transposant les besoins opérationnels en codes rigoureusement architecturés, commentés et conformes aux standards.</p>
+      <div class="ce-box" onclick="this.classList.toggle('open')">
+        <div class="ce-box-head"><h5>Apprentissages critiques travaillés par SAÉ</h5><span class="ce-toggle">▾</span></div>
+        <ul class="ce-list">
+          <li><b>AC21.01</b><span class="ac-txt">Optimiser les requêtes pour la collecte et la mise à disposition des données<span class="ce-saes"><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC21.04</b><span class="ac-txt">Comprendre la nécessité de tester, corriger et documenter un programme<span class="ce-saes"><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC21.05</b><span class="ac-txt">Apprécier l'intérêt de briques logicielles existantes et savoir les utiliser<span class="ce-saes"><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+        </ul>
+      </div>
+      <div class="sae-grid">
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Consolidation, filtrage et préparation des données du Mercato</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Dans le cadre du mercato estival de Coventry City, l'objectif était de structurer et de nettoyer un jeu de données brutes contenant l'ensemble des joueurs de football du marché afin d'isoler les meilleurs profils capables de renforcer l'effectif actuel sous une enveloppe budgétaire stricte de 16 200 000 €.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai configuré les bases techniques de l'application en centralisant les données de performance de l'effectif actuel. J'ai nettoyé les anomalies et géré l'infrastructure de filtrage permettant de trier l'ensemble des joueurs selon leur disponibilité de contrat (visant la fin de contrat au 31 mai 2026 de nos cadres comme notre gardien de but et milieu) et leur coût salarial.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Préparation de Données</span><span class="tool">Pipelines de Filtrage</span><span class="tool">Python</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+            <div class="shot-cap">Illustration 1.1 — Intégration et filtrage des indicateurs de l'effectif dans l'application.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Application "Analyse Crimes USA" : préparation des données</h4>
+            <div class="info-block">
+              <span>Objectif du projet</span>
+              <p>Construire une application interactive (R Shiny) permettant d'explorer les taux de criminalité aux États-Unis pour l'année 2019, à partir d'un jeu de données regroupant 50 états et plusieurs indicateurs (infractions, cambriolages, vols, vols de véhicules, menaces) répartis selon 4 grandes zones géographiques.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai conçu seul l'intégralité de cette application : import et structuration du jeu de données par état et par zone géographique, mise en place des filtres dynamiques (zones, nombre de lignes affichées) et calcul des indicateurs clés affichés en temps réel, comme le taux d'infraction moyen.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">R Shiny</span><span class="tool">Préparation de Données</span><span class="tool">Filtres Dynamiques</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae402-crim-data.png" alt="Tableau de bord Données &amp; Stats de l'application Analyse Crimes USA"></div>
+            <div class="shot-cap">Illustration 1.2 — Aperçu des données et filtres dynamiques par zone géographique.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PANNEAU C2 -->
+    <div id="panel-2" class="sae-panel" style="--cc:var(--c2)">
+      <div class="panel-head"><h3>Analyse statistique</h3><span class="sae-badge">Compétence 2 · Analyser</span></div>
+      <p class="panel-desc">Cette aptitude réside dans le fait de faire ressortir les dynamiques majeures ainsi que les enseignements clés issus des données, en déterminant et en déployant les méthodes statistiques ajustées au cadre de la recherche, aux exigences des directions et aux caractéristiques des données.</p>
+      <div class="ce-box" onclick="this.classList.toggle('open')">
+        <div class="ce-box-head"><h5>Apprentissages critiques travaillés par SAÉ</h5><span class="ce-toggle">▾</span></div>
+        <ul class="ce-list">
+          <li><b>AC22.01</b><span class="ac-txt">Prendre conscience de la différence entre modélisation statistique et analyse exploratoire<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC22.03</b><span class="ac-txt">Comprendre l'intérêt des analyses multivariées pour synthétiser et résumer l'information portée par plusieurs variables<span class="ce-saes"><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC22.04</b><span class="ac-txt">Appréhender l'idée de confronter une hypothèse avec la réalité pour prendre une décision<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span></span></span></li>
+          <li><b>AC22.05</b><span class="ac-txt">Apprécier les limites de validité et les conditions d'application d'une analyse<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+        </ul>
+      </div>
+      <div class="sae-grid">
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Analyse exploratoire multicritère des profils ciblés</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Analyser et catégoriser statistiquement l'ensemble des styles de jeu disponibles sur le marché pour trouver les remplaçants parfaits. L'équipe devait cibler des profils très spécifiques : un gardien de but, des défenseurs centraux, un milieu défensif et un attaquant de type "Renard des surfaces" dont l'unique but est de concrétiser les actions.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai mené l'étude comparative statistique entre les différents profils. J'ai évalué les performances quantitatives de chaque cible potentielle par rapport aux besoins tactiques de Coventry, permettant de valider l'adéquation technique de recrues comme le défenseur Marcos Senesi ou le milieu créatif Morgan Gibbs-White face aux statistiques de notre effectif.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Statistiques Descriptives</span><span class="tool">Analyse Multicritère</span><span class="tool">Typologie de Profils</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+            <div class="shot-cap">Illustration 2.1 — Analyse exploratoire et classification des postes ciblés dans l'interface.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>Projet 203 — Régression sur les surfaces brûlées (feux de forêt)</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>À partir d'un jeu de données réelles sur les incendies de forêt, l'équipe devait identifier les variables météorologiques et environnementales les plus liées à l'étendue des surfaces brûlées, puis construire un modèle de régression capable d'expliquer ce phénomène sous R.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai pris en charge l'analyse statistique du jeu de données : calcul des corrélations entre la surface brûlée et les variables explicatives (température, humidité, vent), construction de nuages de points et d'indicateurs descriptifs pour repérer les relations les plus significatives avant l'étape de modélisation.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">R</span><span class="tool">Corrélations</span><span class="tool">Statistiques Descriptives</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae203-humidite-temperature.png" alt="Humidité du combustible en fonction de la température lors du feu"></div>
+            <div class="shot-cap">Illustration 2.2 — Humidité du combustible en fonction de la température lors du feu (tendance lissée).</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.01 — Marché immobilier de Boston : analyse exploratoire</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Sur un jeu de données de 506 observations et 13 variables explicatives, l'équipe devait identifier les facteurs influençant significativement le prix médian des logements à Boston, en vue de construire le modèle de régression le plus performant.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai contribué à l'étude des corrélations bivariées entre le prix médian et les variables explicatives. Nous avons mis en évidence une corrélation négative forte avec la part de population à faible statut socio-économique (r ≈ −0,74) et une corrélation positive forte avec le nombre moyen de pièces (r ≈ +0,70), ainsi qu'une forte colinéarité entre le taux d'imposition et l'accessibilité aux autoroutes, à surveiller lors de la modélisation.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">R</span><span class="tool">Corrélations</span><span class="tool">Test de Student</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae401-selection-variables.png" alt="Évolution du RSS et du R² ajusté selon le nombre de variables"></div>
+            <div class="shot-cap">Illustration 2.3 — Évolution du RSS et du R² ajusté selon le nombre de variables retenues.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Application "Analyse Crimes USA" : corrélations entre indicateurs</h4>
+            <div class="info-block">
+              <span>Objectif du projet</span>
+              <p>Étudier les liens statistiques entre les différents types de criminalité (infractions, cambriolages, vols, vols de véhicules) afin de comprendre si certains indicateurs évoluent ensemble d'un état à l'autre.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai développé le module d'analyse bivariée permettant de croiser deux variables au choix (ex. taux d'infraction / taux de vol de véhicules) avec affichage du nuage de points, ainsi que la matrice de corrélation interactive entre les principaux indicateurs. J'ai notamment mis en évidence une forte corrélation entre le taux d'infraction et le taux de vol (0,97) et entre le taux d'infraction et les cambriolages (0,86).</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">R Shiny</span><span class="tool">Matrice de Corrélation</span><span class="tool">Analyse Bivariée</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae402-crim-correlation.png" alt="Matrice de corrélation entre les indicateurs de criminalité"></div>
+            <div class="shot-cap">Illustration 2.4 — Matrice de corrélation entre infractions, cambriolages et vols.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PANNEAU C3 -->
+    <div id="panel-3" class="sae-panel" style="--cc:var(--c3)">
+      <div class="panel-head"><h3>Valorisation &amp; dataviz</h3><span class="sae-badge">Compétence 3 · Valoriser</span></div>
+      <p class="panel-desc">Cette aptitude réside dans le fait de présenter et défendre ses conclusions sous le format le plus approprié, en se mettant à la portée du degré de maîtrise de l'interlocuteur, en décryptant et en situant les livrables avec discernement, tout en restant vigilant quant aux enjeux éthiques, moraux et légaux liés à l'exploitation et au partage des informations.</p>
+      <div class="ce-box" onclick="this.classList.toggle('open')">
+        <div class="ce-box-head"><h5>Apprentissages critiques travaillés par SAÉ</h5><span class="ce-toggle">▾</span></div>
+        <ul class="ce-list">
+          <li><b>AC23.01</b><span class="ac-txt">Saisir l'intérêt de mobiliser de manière proactive des ressources métiers liées à l'environnement (y compris économique, international…)<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC23.02</b><span class="ac-txt">Savoir défendre ses choix d'analyses<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC23.03</b><span class="ac-txt">Saisir la nécessité de choisir des indicateurs pertinents pour communiquer sur les résultats<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+          <li><b>AC23.04</b><span class="ac-txt">Prendre conscience de la rigueur requise dans ses productions et dans la communication à leur propos<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span><span class="ce-sae">SAÉ 4.02</span></span></span></li>
+        </ul>
+      </div>
+      <div class="sae-grid">
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Conception et ergonomie de l'application "Analyse Mercato"</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Rendre l'analyse accessible et exploitable pour des décideurs ou des dirigeants de club qui ne maîtrisent pas la programmation. Il fallait concevoir un tableau de bord interactif affichant le terrain tactique, le budget dynamique restant en temps réel et des fiches détaillées par joueur.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai travaillé activement sur la valorisation visuelle et l'ergonomie de l'interface utilisateur (UI). J'ai structuré la mise en page de l'application (barre latérale de navigation, boutons clairs "Joueur", "Analyse" et "Joueur idéal") et veillé à la clarté de l'affichage des enveloppes budgétaires pour faciliter la prise de décision lors des simulations de recrutement.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Interface Utilisateur (UI)</span><span class="tool">Visualisation Interactive</span><span class="tool">Design de Dashboard</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+            <div class="shot-cap">Illustration 3.1 — Rendu visuel de la page d'accueil de notre application d'aide à la décision.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Application "Analyse Crimes USA" : cartographie interactive</h4>
+            <div class="info-block">
+              <span>Objectif du projet</span>
+              <p>Restituer la répartition géographique de la criminalité aux États-Unis de façon immédiatement lisible, pour permettre une comparaison visuelle rapide entre les 50 états sur l'indicateur de son choix.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai conçu le module de cartographie : une carte de chaleur des États-Unis dont l'intensité de couleur varie selon la variable sélectionnée (ex. taux de menaces), avec une légende graduée. Ce choix de valorisation permet de repérer en un coup d'œil les états les plus exposés, comme le Nouveau-Mexique ou l'Alaska sur l'indicateur "menace".</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">R Shiny</span><span class="tool">Cartographie (Choropleth)</span><span class="tool">Data Storytelling</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae402-crim-carto.png" alt="Carte de chaleur de la criminalité aux États-Unis"></div>
+            <div class="shot-cap">Illustration 3.2 — Carte de chaleur interactive de l'indicateur "menace" par état.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PANNEAU C4 -->
+    <div id="panel-4" class="sae-panel" style="--cc:var(--c4)">
+      <div class="panel-head"><h3>Modélisation prédictive &amp; Optimisation</h3><span class="sae-badge">Compétence 4 · Modéliser</span></div>
+      <p class="panel-desc">Cette aptitude réside dans le fait de concevoir, paramétrer et estimer des modèles statistiques de nature à expliciter ou anticiper une variable cible. Elle implique de retenir une modélisation conforme aux données, de filtrer les indicateurs significatifs, de contrôler les postulats de départ et d'apprécier la performance de prédiction de la structure ainsi créée.</p>
+      <div class="ce-box" onclick="this.classList.toggle('open')">
+        <div class="ce-box-head"><h5>Apprentissages critiques travaillés par SAÉ</h5><span class="ce-toggle">▾</span></div>
+        <ul class="ce-list">
+          <li><b>AC24.03EMS</b><span class="ac-txt">Comprendre l'impact du type de données sur le choix de la modélisation à mettre en œuvre<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span></span></span></li>
+          <li><b>AC24.04EMS</b><span class="ac-txt">Apprécier les limites de validité et les conditions d'application d'un modèle<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span></span></span></li>
+          <li><b>AC24.05EMS</b><span class="ac-txt">Réaliser l'importance de la mise en œuvre d'une procédure de test statistique pour valider ou non une hypothèse<span class="ce-saes"><span class="ce-sae">SAÉ 4.EMS.01</span></span></span></li>
+        </ul>
+      </div>
+      <div class="sae-grid">
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Modélisation et algorithme de sélection du "Joueur Idéal"</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Modéliser un algorithme de contraintes capable de sélectionner automatiquement la combinaison de joueurs offrant le meilleur rapport qualité/prix du marché, tout en respectant scrupuleusement la limite financière absolue imposée par le budget de 16,2 M€.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai participé à la modélisation de la logique du bouton intelligent "Joueur Idéal". Cette fonctionnalité applique un algorithme d'optimisation sous contraintes de ressources qui a proposé la sélection finale la plus performante possible pour le club : Robin Roefs (Gardien), Marcos Senesi (Défenseur), Morgan Gibbs-White (Milieu) et Jean-Philippe Mateta (Attaquant).</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Modélisation sous Contraintes</span><span class="tool">Algorithmes Décisionnels</span><span class="tool">Optimisation Budgétaire</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+            <div class="shot-cap">Illustration 4.1 — Algorithme de sélection automatique du joueur idéal en action.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.01 — Marché immobilier de Boston : sélection du modèle</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Construire un modèle de régression linéaire multiple permettant de prédire le prix médian des logements à Boston, en arbitrant entre puissance explicative et risque de surapprentissage.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai participé à la sélection du modèle final à 10 variables via une démarche stepwise (forward, backward et combinée, convergeant vers le même résultat), et à la résolution du problème de colinéarité détecté par le VIF (taux d'imposition ≈ 9, accessibilité autoroutes ≈ 7,4) en dichotomisant cette dernière variable, ramenant tous les VIF sous le seuil de 5.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Régression Linéaire Multiple</span><span class="tool">Stepwise</span><span class="tool">VIF</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae401-residus.png" alt="Résidus en fonction des valeurs ajustées du modèle"></div>
+            <div class="shot-cap">Illustration 4.2 — Résidus du modèle final en fonction des valeurs ajustées.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.01 — Marché immobilier de Boston : diagnostic &amp; évaluation</h4>
+            <div class="info-block">
+              <span>Objectif de l'équipe</span>
+              <p>Vérifier la validité statistique du modèle retenu (normalité et homogénéité des résidus, individus atypiques) puis évaluer sa capacité prédictive réelle au-delà du simple R².</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai participé à l'analyse des distances de Cook pour identifier les individus atypiques du modèle, ainsi qu'à l'évaluation finale par Bootstrap (200 ré-échantillonnages), aboutissant à une RMSE moyenne d'environ 4,8 k$ pour un R² ajusté d'environ 0,73 — un résultat jugé stable et nettement inférieur à l'écart-type naturel du prix médian (≈ 9,2 k$).</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Distance de Cook</span><span class="tool">Bootstrap</span><span class="tool">R</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae401-cooksD.png" alt="Distances de Cook du modèle de régression"></div>
+            <div class="shot-cap">Illustration 4.3 — Détection des individus atypiques via la distance de Cook.</div>
+          </div>
+        </article>
+
+        <article class="sae-card">
+          <div>
+            <h4>SAÉ 4.02 — Application "Analyse Crimes USA" : régression bivariée</h4>
+            <div class="info-block">
+              <span>Objectif du projet</span>
+              <p>Modéliser la relation entre deux indicateurs de criminalité afin d'estimer dans quelle mesure l'un peut prédire l'évolution de l'autre d'un état à l'autre, et matérialiser cette tendance visuellement.</p>
+            </div>
+            <div class="info-block">
+              <span>Mon rôle / apport</span>
+              <p>J'ai intégré le calcul et l'affichage automatique d'une droite de régression linéaire sur le nuage de points bivarié, recalculée dynamiquement selon les deux variables choisies par l'utilisateur. Sur le couple taux d'infraction / taux de vol de véhicules, la tendance linéaire confirme la très forte corrélation positive entre les deux indicateurs.</p>
+            </div>
+            <div class="info-block">
+              <span>Outils &amp; technologies</span>
+              <div class="tools"><span class="tool">Régression Linéaire</span><span class="tool">R Shiny</span><span class="tool">Visualisation Dynamique</span></div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot"><img src="sae402-crim-bivarie.png" alt="Nuage de points et droite de régression entre infractions et vols de véhicules"></div>
+            <div class="shot-cap">Illustration 4.3 — Droite de régression entre taux d'infraction et taux de vol de véhicules.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+    </div><!-- /view-comp -->
+
+    <!-- ============ VUE PAR SAÉ ============ -->
+    <div class="view" id="view-proj">
+      <div class="proj-list">
+
+        <!-- PROJET MERCATO -->
+        <div class="proj-card">
+          <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+            <div class="proj-head-l">
+              <h4>SAÉ 4.02 — Analyse Mercato (Coventry City)</h4>
+              <div class="proj-tags">
+                <span class="proj-tag" style="background:var(--c1)">C1</span>
+                <span class="proj-tag" style="background:var(--c2)">C2</span>
+                <span class="proj-tag" style="background:var(--c3)">C3</span>
+                <span class="proj-tag" style="background:var(--c4)">C4</span>
+              </div>
+            </div>
+            <span class="proj-toggle">▾</span>
+          </div>
+          <div class="proj-body"><div class="proj-body-in">
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c1)">C1 · Traiter — Consolidation, filtrage et préparation des données</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Dans le cadre du mercato estival de Coventry City, l'objectif était de structurer et de nettoyer un jeu de données brutes contenant l'ensemble des joueurs de football du marché afin d'isoler les meilleurs profils capables de renforcer l'effectif actuel sous une enveloppe budgétaire stricte de 16 200 000 €.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai configuré les bases techniques de l'application en centralisant les données de performance de l'effectif actuel. J'ai nettoyé les anomalies et géré l'infrastructure de filtrage permettant de trier l'ensemble des joueurs selon leur disponibilité de contrat et leur coût salarial.</p>
+                </div>
+                <div class="tools"><span class="tool">Préparation de Données</span><span class="tool">Pipelines de Filtrage</span><span class="tool">Python</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c2)">C2 · Analyser — Analyse exploratoire multicritère des profils ciblés</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Analyser et catégoriser statistiquement l'ensemble des styles de jeu disponibles sur le marché pour trouver les remplaçants parfaits aux postes ciblés : gardien, défenseurs centraux, milieu défensif, attaquant de pointe.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai mené l'étude comparative statistique entre les différents profils, évaluant leurs performances quantitatives par rapport aux besoins tactiques de Coventry, permettant de valider l'adéquation de recrues comme Marcos Senesi ou Morgan Gibbs-White.</p>
+                </div>
+                <div class="tools"><span class="tool">Statistiques Descriptives</span><span class="tool">Analyse Multicritère</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c3)">C3 · Valoriser — Conception et ergonomie de l'application</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Rendre l'analyse accessible et exploitable pour des décideurs ou dirigeants de club ne maîtrisant pas la programmation, via un tableau de bord interactif (terrain tactique, budget dynamique, fiches joueurs).</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai travaillé activement sur la valorisation visuelle et l'ergonomie de l'interface : structuration de la navigation, clarté des enveloppes budgétaires pour faciliter la prise de décision lors des simulations de recrutement.</p>
+                </div>
+                <div class="tools"><span class="tool">Interface Utilisateur (UI)</span><span class="tool">Design de Dashboard</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c4)">C4 · Modéliser — Algorithme de sélection du "Joueur Idéal"</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Modéliser un algorithme de contraintes capable de sélectionner automatiquement la combinaison de joueurs offrant le meilleur rapport qualité/prix, tout en respectant le budget de 16,2 M€.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai participé à la modélisation de la logique du bouton "Joueur Idéal", appliquant un algorithme d'optimisation sous contraintes qui a proposé la sélection finale : Robin Roefs, Marcos Senesi, Morgan Gibbs-White et Jean-Philippe Mateta.</p>
+                </div>
+                <div class="tools"><span class="tool">Modélisation sous Contraintes</span><span class="tool">Optimisation Budgétaire</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae-402-mercato.png" alt="Interface de l'application Analyse Mercato"></div>
+              </div>
+            </article>
+
+          </div></div>
+        </div>
+
+        <!-- PROJET CRIMES USA -->
+        <div class="proj-card">
+          <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+            <div class="proj-head-l">
+              <h4>SAÉ 4.02 — Analyse Crimes USA</h4>
+              <div class="proj-tags">
+                <span class="proj-tag" style="background:var(--c1)">C1</span>
+                <span class="proj-tag" style="background:var(--c2)">C2</span>
+                <span class="proj-tag" style="background:var(--c3)">C3</span>
+                <span class="proj-tag" style="background:var(--c4)">C4</span>
+              </div>
+            </div>
+            <span class="proj-toggle">▾</span>
+          </div>
+          <div class="proj-body"><div class="proj-body-in">
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c1)">C1 · Traiter — Préparation des données</h4>
+                <div class="info-block">
+                  <span>Objectif du projet</span>
+                  <p>Construire une application interactive (R Shiny) permettant d'explorer les taux de criminalité aux États-Unis pour l'année 2019, à partir d'un jeu de données regroupant 50 états et plusieurs indicateurs.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai conçu seul l'intégralité de cette application : import et structuration du jeu de données par état et par zone géographique, mise en place des filtres dynamiques et calcul des indicateurs clés en temps réel.</p>
+                </div>
+                <div class="tools"><span class="tool">R Shiny</span><span class="tool">Filtres Dynamiques</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae402-crim-data.png" alt="Tableau de bord Données &amp; Stats"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c2)">C2 · Analyser — Corrélations entre indicateurs</h4>
+                <div class="info-block">
+                  <span>Objectif du projet</span>
+                  <p>Étudier les liens statistiques entre les différents types de criminalité afin de comprendre si certains indicateurs évoluent ensemble d'un état à l'autre.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai développé le module de matrice de corrélation interactive, mettant en évidence une forte corrélation entre le taux d'infraction et le taux de vol (0,97) et entre infraction et cambriolages (0,86).</p>
+                </div>
+                <div class="tools"><span class="tool">Matrice de Corrélation</span><span class="tool">Analyse Bivariée</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae402-crim-correlation.png" alt="Matrice de corrélation"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c3)">C3 · Valoriser — Cartographie interactive</h4>
+                <div class="info-block">
+                  <span>Objectif du projet</span>
+                  <p>Restituer la répartition géographique de la criminalité de façon immédiatement lisible, pour permettre une comparaison visuelle rapide entre les 50 états.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai conçu le module de cartographie : une carte de chaleur dont l'intensité varie selon la variable choisie, permettant de repérer en un coup d'œil les états les plus exposés.</p>
+                </div>
+                <div class="tools"><span class="tool">Cartographie (Choropleth)</span><span class="tool">Data Storytelling</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae402-crim-carto.png" alt="Carte de chaleur de la criminalité"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c4)">C4 · Modéliser — Régression bivariée</h4>
+                <div class="info-block">
+                  <span>Objectif du projet</span>
+                  <p>Modéliser la relation entre deux indicateurs de criminalité afin d'estimer dans quelle mesure l'un peut prédire l'évolution de l'autre.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai intégré le calcul et l'affichage automatique d'une droite de régression linéaire sur le nuage de points, recalculée dynamiquement selon les deux variables choisies par l'utilisateur.</p>
+                </div>
+                <div class="tools"><span class="tool">Régression Linéaire</span><span class="tool">R Shiny</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae402-crim-bivarie.png" alt="Droite de régression"></div>
+              </div>
+            </article>
+
+          </div></div>
+        </div>
+
+        <!-- PROJET 401 BOSTON -->
+        <div class="proj-card">
+          <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+            <div class="proj-head-l">
+              <h4>SAÉ 4.01 — Marché immobilier de Boston</h4>
+              <div class="proj-tags">
+                <span class="proj-tag" style="background:var(--c2)">C2</span>
+                <span class="proj-tag" style="background:var(--c4)">C4</span>
+              </div>
+            </div>
+            <span class="proj-toggle">▾</span>
+          </div>
+          <div class="proj-body"><div class="proj-body-in">
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c2)">C2 · Analyser — Analyse exploratoire</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Sur un jeu de données de 506 observations et 13 variables, identifier les facteurs influençant significativement le prix médian des logements à Boston.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai contribué à l'étude des corrélations bivariées : corrélation négative forte avec la part de population à faible statut (r ≈ −0,74), positive forte avec le nombre de pièces (r ≈ +0,70), et identification d'une colinéarité forte entre taux d'imposition et accessibilité aux autoroutes.</p>
+                </div>
+                <div class="tools"><span class="tool">R</span><span class="tool">Corrélations</span><span class="tool">Test de Student</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae401-selection-variables.png" alt="RSS et R² ajusté selon le nombre de variables"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c4)">C4 · Modéliser — Sélection du modèle</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Construire un modèle de régression linéaire multiple en arbitrant entre puissance explicative et risque de surapprentissage.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai participé à la sélection du modèle final à 10 variables via une démarche stepwise, et à la résolution de la colinéarité détectée par le VIF (taux d'imposition ≈ 9, accessibilité autoroutes ≈ 7,4) en dichotomisant cette dernière variable.</p>
+                </div>
+                <div class="tools"><span class="tool">Stepwise</span><span class="tool">VIF</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae401-residus.png" alt="Résidus du modèle"></div>
+              </div>
+            </article>
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c4)">C4 · Modéliser — Diagnostic &amp; évaluation</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>Vérifier la validité statistique du modèle retenu et évaluer sa capacité prédictive réelle au-delà du simple R².</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai participé à l'analyse des distances de Cook et à l'évaluation par Bootstrap (200 ré-échantillonnages), aboutissant à une RMSE moyenne d'environ 4,8 k$ pour un R² ajusté d'environ 0,73.</p>
+                </div>
+                <div class="tools"><span class="tool">Distance de Cook</span><span class="tool">Bootstrap</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae401-cooksD.png" alt="Distances de Cook"></div>
+              </div>
+            </article>
+
+          </div></div>
+        </div>
+
+        <!-- PROJET 203 -->
+        <div class="proj-card">
+          <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+            <div class="proj-head-l">
+              <h4>Projet 203 — Régression sur les surfaces brûlées</h4>
+              <div class="proj-tags">
+                <span class="proj-tag" style="background:var(--c2)">C2</span>
+              </div>
+            </div>
+            <span class="proj-toggle">▾</span>
+          </div>
+          <div class="proj-body"><div class="proj-body-in">
+
+            <article class="sae-card">
+              <div>
+                <h4 style="color:var(--c2)">C2 · Analyser — Corrélations météo / surface brûlée</h4>
+                <div class="info-block">
+                  <span>Objectif de l'équipe</span>
+                  <p>À partir d'un jeu de données réelles sur les incendies de forêt, identifier les variables météorologiques et environnementales les plus liées à l'étendue des surfaces brûlées.</p>
+                </div>
+                <div class="info-block">
+                  <span>Mon rôle / apport</span>
+                  <p>J'ai pris en charge l'analyse statistique : calcul des corrélations entre la surface brûlée et les variables explicatives (température, humidité, vent), avant l'étape de modélisation.</p>
+                </div>
+                <div class="tools"><span class="tool">R</span><span class="tool">Corrélations</span></div>
+              </div>
+              <div class="gallery">
+                <div class="shot"><img src="sae203-humidite-temperature.png" alt="Humidité du combustible en fonction de la température lors du feu"></div>
+              </div>
+            </article>
+
+          </div></div>
+        </div>
+
+      </div>
+    </div><!-- /view-proj -->
+
+  </div>
+</section>
+
+<!-- ============ ALTERNANCE ============ -->
+<section id="alternance" class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">// 02 — Terrain</div>
+      <h2>Expérience en alternance</h2>
+      <p>Les compétences travaillées à l'IUT m'ont été directement utiles pour mener à bien mes missions en entreprise.</p>
+    </div>
+
+    <div class="alt reveal">
+      <div class="alt-head">
+        <div class="role">Chargé d'études géomarketing</div>
+        <h3>La Longue Vue</h3>
+        <p>Je fais parler la donnée à travers des cartes, pour répondre aux problématiques des pharmaciens sur leurs projets de transfert ou d'agrandissement d'officine.</p>
+      </div>
+
+      <div class="pn-grid">
+        <div class="pn-card" style="border-top-color:var(--c1)">
+          <div class="pn-tags">
+            <span class="pn-tag" style="background:var(--c1)">C1 · Traiter</span>
+          </div>
+          <h4>Anonymisation RGPD des bases clients</h4>
+          <p>Traitement des bases de données clients fournies par les pharmaciens (nom, adresse, dépenses) via le logiciel interne "Le Brouilleur", qui remplace les identités par un identifiant unique tout en conservant la localisation à un degré de précision paramétrable, pour respecter le RGPD et le secret professionnel propre au secteur de la santé.</p>
+          <div class="pn-shot"><img src="alt-brouilleur.png" alt="Interface du logiciel Le Brouilleur pour l'anonymisation des bases clients"></div>
+          <div class="pn-cap">Interface du « Brouilleur » — anonymisation d'une base clients avec précision paramétrable.</div>
+        </div>
+
+        <div class="pn-card" style="border-top-color:var(--c1)">
+          <div class="pn-tags">
+            <span class="pn-tag" style="background:var(--c1)">C1 · Traiter</span>
+            <span class="pn-tag" style="background:var(--c4)">C4 · Modéliser</span>
+          </div>
+          <h4>Construction des zones de chalandise</h4>
+          <p>Modélisation des zones de chalandise primaire, secondaire et tertiaire d'une officine à partir des données clients géolocalisées, via des isochrones calculés sur le logiciel "La Loupe" (5/10/15 min en bord de route, jusqu'à 10/20/30 min en centre commercial selon la typologie du point de vente).</p>
+          <div class="pn-shot"><img src="alt-zone-chalandise.png" alt="Carte de la zone de chalandise naturelle d'une pharmacie"></div>
+          <div class="pn-cap">Zone de chalandise naturelle — 80 % de la clientèle à moins de 9 minutes en voiture.</div>
+        </div>
+
+        <div class="pn-card" style="border-top-color:var(--c2)">
+          <div class="pn-tags">
+            <span class="pn-tag" style="background:var(--c1)">C1 · Traiter</span>
+            <span class="pn-tag" style="background:var(--c2)">C2 · Analyser</span>
+          </div>
+          <h4>Cartographie des prescripteurs &amp; concurrents</h4>
+          <p>Traitement sous Excel des bases de prescripteurs (RECHERCHEV croisant nom/prénom avec une base de praticiens), sélection des 21 pharmacies concurrentes les plus influentes de la zone, puis analyse statistique de leur poids respectif (chiffre d'affaires, ancienneté des titulaires, surface de vente) pour cartographier l'environnement concurrentiel et médical sur "La Carte au Trésor".</p>
+          <div class="pn-shot"><img src="alt-prescripteurs.png" alt="Carte des principaux prescripteurs par commune"></div>
+          <div class="pn-cap">Cartographie des principaux prescripteurs, par chiffre d'affaires généré pour l'officine.</div>
+          <div class="pn-shot"><img src="alt-concurrents.png" alt="Carte de la vue d'ensemble des pharmacies concurrentes du secteur"></div>
+          <div class="pn-cap">Vue d'ensemble des concurrents, colorés selon leur chiffre d'affaires (vert / orange / rouge).</div>
+        </div>
+
+        <div class="pn-card" style="border-top-color:var(--c3)">
+          <div class="pn-tags">
+            <span class="pn-tag" style="background:var(--c2)">C2 · Analyser</span>
+            <span class="pn-tag" style="background:var(--c3)">C3 · Valoriser</span>
+          </div>
+          <h4>Estimation de chiffre d'affaires &amp; restitution client</h4>
+          <p>Calcul du potentiel de chiffre d'affaires d'un projet à partir des flux de véhicules (MyTraffic) et des taux de captation théoriques par typologie d'officine, puis mise en forme des résultats (Word, PowerPoint) et restitution orale d'une heure aux pharmaciens pour les accompagner dans leur décision de transfert ou d'agrandissement.</p>
+          <div class="pn-shot"><img src="alt-consommation.png" alt="Carte du potentiel de consommation en pharmacie par zone de chalandise"></div>
+          <div class="pn-cap">Potentiel de consommation en pharmacie du secteur, ventilé par zone de chalandise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div class="meta">
+      Hugo Caillon<br>
+      Portfolio universitaire &amp; professionnel<br>
+      © 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Menu mobile */
+const burger=document.getElementById('burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* Panneaux SAÉ */
+let activePanel=null;
+function togglePanel(n){
+  const panel=document.getElementById('panel-'+n);
+  const card=document.querySelector('.comp-card[data-comp="'+n+'"]');
+  if(activePanel===n){panel.classList.remove('open');card.classList.remove('active');activePanel=null;return;}
+  if(activePanel!==null){
+    document.getElementById('panel-'+activePanel).classList.remove('open');
+    document.querySelector('.comp-card[data-comp="'+activePanel+'"]').classList.remove('active');
+  }
+  panel.classList.add('open');card.classList.add('active');activePanel=n;
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+}
+
+/* Bascule Compétences / SAÉ */
+function switchView(v){
+  document.getElementById('view-comp').classList.toggle('active', v==='comp');
+  document.getElementById('view-proj').classList.toggle('active', v==='proj');
+  document.getElementById('tab-comp').classList.toggle('active', v==='comp');
+  document.getElementById('tab-proj').classList.toggle('active', v==='proj');
+}
+
+/* Reveal au scroll */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
